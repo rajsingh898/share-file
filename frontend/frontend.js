@@ -23,7 +23,7 @@ uploadForm.addEventListener('submit', async function (e) {
     formData.append('file', fileInput.files[0]);
 
     try {
-        const response = await fetch(`${apiBaseUrl}/upload`, {
+        const response = await fetch(`${apiBaseUrl}/api/upload`, {
             method: 'POST',
             body: formData,
         });
@@ -58,7 +58,7 @@ function downloadFile() {
         return;
     }
 
-    fetch(`${apiBaseUrl}/download/${pin}`)
+    fetch(`${apiBaseUrl}/api/download/${pin}`)
         .then((response) => {
             if (response.ok) {
                 return response.blob();

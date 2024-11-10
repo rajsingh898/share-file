@@ -9,7 +9,7 @@ const cors = require('cors');
 
 
 
-// Initialize the app
+// Initialize  app 
 const app = express();
 
 app.use(cors());

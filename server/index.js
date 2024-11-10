@@ -15,7 +15,62 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-  res.send('Welcome to the file-sharing service. Use /upload to upload files and /download/:pin to download them.');
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>File Sharing Service</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+          .card {
+            background-color: #f8f8f8;
+            color: #333;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            max-width: 90%;
+          }
+          h1 {
+            color: #333;
+          }
+          p {
+            font-size: 1.1em;
+            margin: 10px 0;
+          }
+          a {
+            color: #007bff;
+            text-decoration: none;
+          }
+          a:hover {
+            text-decoration: underline;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <h1>Welcome to the File Sharing Service!</h1>
+          <p>Upload and share your files easily.</p>
+          <p>To upload a file, go to <a href="/upload">/upload</a>.</p>
+          <p>To download a file, use the pin provided at <a href="/download/:pin">/download/:pin</a>.</p>
+          <p>Visit the live website: <a href="https://share-file-client.vercel.app/" target="_blank">File Sharing Service</a></p>
+        </div>
+      </body>
+    </html>
+  `);
 });
 
 const uploadDirectory = '/tmp/uploads/';  // Use Vercel's temporary directory

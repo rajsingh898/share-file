@@ -26,6 +26,7 @@ uploadForm.addEventListener('submit', async function (e) {
         const response = await fetch(`${apiBaseUrl}/upload`, {
             method: 'POST',
             body: formData,
+            credentials : 'include',
         });
 
         if (response.ok) {

@@ -1,6 +1,6 @@
 const uploadForm = document.getElementById('uploadForm');
 const responseMessage = document.getElementById('responseMessage');
-const apiBaseUrl = "http://localhost:5000";
+const apiBaseUrl = "https://share-file-gamma.vercel.app";
 
 // Check if there's a message in session storage and display it
 if (sessionStorage.getItem('uploadMessage')) {

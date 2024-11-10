@@ -1,6 +1,6 @@
 const uploadForm = document.getElementById('uploadForm');
 const responseMessage = document.getElementById('responseMessage');
-const apiBaseUrl = "https://file-share-lake.vercel.app/api";
+const apiBaseUrl = "https://file-share-l8hs8wfv4-rajs-projects-ecc11399.vercel.app";
 
 // Check if there's a message in session storage and display it
 if (sessionStorage.getItem('uploadMessage')) {

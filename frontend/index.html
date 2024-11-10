@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileVault - A File Sharing Service</title>
+    
+    <link rel="stylesheet" href="index.css">
+    <body>
+        <!-- Main heading outside the boxes -->
+        <h1>Because Sharing Files Should Be Effortless</h1>
+        
+        <!-- Centered container for the two cards -->
+        <div class="container">
+            <!-- Upload Card -->
+            <div class="card">
+                <h2>Upload File</h2>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" id="file" name="file" required />
+                    <button type="submit">Upload</button>
+                </form>
+                <h3 id="responseMessage"></h3>
+            </div>
+            <!-- Download Card -->
+            <div class="card">
+                <h2>Download File</h2>
+                <input type="text" id="pin" placeholder="Enter Pin to Download File" />
+                <button onclick="downloadFile()">Download</button>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-container">
+                <a href="https://www.linkedin.com/in/raj-singh-caj/" target="_blank" class="footer-link">LinkedIn</a>
+                <a href="https://github.com/rajsingh898" target="_blank" class="footer-link">Github</a>
+            </div>
+        </footer>
+        
+    
+        <script src="frontend.js"></script>
+    </body>
+    
+</html>

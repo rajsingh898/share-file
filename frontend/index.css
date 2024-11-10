@@ -1,0 +1,143 @@
+/* General body and layout styling */
+html, body {
+    height: 100%;  /* Ensure the body takes up full height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;  /* Stack content and footer */
+    text-align: center;
+    background-color: #006d67;  /* Original background color */
+}
+
+/* Main content styling */
+body {
+    flex-grow: 1;  /* Allow content to expand and push footer down */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main heading styling */
+h1 {
+    font-size: 2rem;
+    color: #b0c4de;  /* Light steel blue for the heading */
+    font-weight: 600;
+    margin-top: 0;  /* Remove top margin */
+    width: 100%;  /* Ensure the heading fits within the screen */
+    max-width: 500px;  /* Prevent heading from being too large */
+    margin-bottom: 30px;  /* Space between heading and cards */
+    word-wrap: break-word;  /* Allow the heading text to wrap */
+    text-align: center;  /* Center align the heading horizontally */
+    align-self: center;  /* Ensure the heading is aligned in the center vertically */
+}
+
+/* Centered container for the two cards */
+.container {
+    display: flex;
+    flex-direction: column;  /* Stack cards vertically */
+    gap: 30px;
+    align-items: center;  /* Center cards horizontally */
+    margin-top: 20px;  /* Space between heading and cards */
+    flex-grow: 1;  /* Allow container to expand */
+}
+
+/* Card styles */
+.card {
+    background-color: #f5f5f0;  /* Dark blue-grey card background */
+    border-radius: 10px;
+    padding: 30px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card heading styles */
+.card h2 {
+    font-size: 1.4rem;
+    color: #34495e;  /* Darker gray for card headers */
+    margin-bottom: 20px;
+}
+
+/* Input and button styling */
+input[type="file"],
+input[type="text"],
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #34495e;  /* Darker blue-grey border */
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Button styling */
+button {
+    background-color: #3498db;  /* Bright blue for buttons */
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;  /* Darker blue on hover */
+}
+
+/* Response message styling */
+#responseMessage {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #b0c4de;  /* Light steel blue for response message */
+}
+
+/* Footer styling */
+footer {
+    background-color: #1f2a3a;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    margin-top: auto;  /* Pushes footer to the bottom */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-link {
+    color: #a0c7d3;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer-link:hover {
+    color: #1f6fa0;
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;  /* Smaller font size for the heading */
+        margin-top: 10vh;  /* Flexible top margin */
+    }
+
+    .container {
+        flex-direction: column;  /* Keep stacking cards vertically */
+        align-items: center;  /* Keep the cards centered */
+    }
+
+    .card {
+        max-width: 100%;
+    }
+}

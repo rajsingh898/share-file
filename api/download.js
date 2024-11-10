@@ -1,14 +1,13 @@
+const express = require('express');
 const path = require('path');
-const fs = require('fs');
 
-// In-memory mapping of pins to file paths
+const app = express();
 const filePinMap = {};
 
-module.exports = (req, res) => {
-  const pin = req.query.pin;
-
+app.get('/download/:pin', (req, res) => {
+  const pin = req.params.pin;
   const filePath = filePinMap[pin];
-  
+
   if (!filePath) {
     return res.status(404).json({ error: 'File not found or invalid pin' });
   }
@@ -18,4 +17,8 @@ module.exports = (req, res) => {
       res.status(500).json({ error: 'Error downloading file' });
     }
   });
+});
+
+module.exports = (req, res) => {
+  app(req, res);
 };

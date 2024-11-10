@@ -63,9 +63,7 @@ app.get('/', (req, res) => {
       <body>
         <div class="card">
           <h1>Welcome to the File Sharing Service!</h1>
-          <p>Upload and share your files easily.</p>
-          <p>To upload a file, go to <a href="/upload">/upload</a>.</p>
-          <p>To download a file, use the pin provided at <a href="/download/:pin">/download/:pin</a>.</p>
+          
           <p>Visit the live website: <a href="https://share-file-client.vercel.app/" target="_blank">File Sharing Service</a></p>
         </div>
       </body>

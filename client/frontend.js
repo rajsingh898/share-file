@@ -27,6 +27,9 @@ uploadForm.addEventListener('submit', async function (e) {
             method: 'POST',
             body: formData,
             credentials : 'include',
+            headers: {
+    'Content-Type': 'multipart/form-data',
+  }
         });
 
         if (response.ok) {

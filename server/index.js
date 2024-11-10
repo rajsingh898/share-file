@@ -12,7 +12,11 @@ const cors = require('cors');
 // Initialize  app 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin : "*",
+  methods : ["POST","GET"],
+  credentials : true
+}));
 
 const uploadDirectory = 'uploads/';
 

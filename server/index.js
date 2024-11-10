@@ -13,7 +13,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-  origin : ["https://share-file-gamma.vercel.app/"],
+  origin : ["https://share-file-gamma.vercel.app"],
   methods : ["POST","GET"],
   credentials : true
 }));

@@ -15,11 +15,13 @@ const app = express();
 app.use(cors({
   origin : 'https://share-file-client.vercel.app',
   methods : ['GET','POST'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials : true
 }));
 
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the file-sharing service. Use /upload to upload files and /download/:pin to download them.');
+});
 
 const uploadDirectory = 'uploads/';
 
@@ -74,7 +76,3 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 // Root route for testing the server
-app.get('/', (req, res) => {
-    res.send('Welcome to the file-sharing service. Use /upload to upload files and /download/:pin to download them.');
-  });
-  

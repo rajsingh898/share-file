@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,4 +39,140 @@
         <script src="frontend.js"></script>
     </body>
     
+</html> -->
+
+
+
+<!-- Version 2  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FileVault - Secure File Sharing</title>
+<link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<div class="brand">File<span>Vault</span></div>
+<div class="tagline">Secure • Simple • Fast</div>
+</header>
+
+<section class="hero">
+<h1>Share files securely using a one-time PIN</h1>
+<p>
+Upload a file and generate a secure PIN.  
+Share the PIN to allow someone to download the file.
+</p>
+</section>
+
+<main class="grid">
+
+<section class="card">
+<h2>Upload File</h2>
+
+<form id="uploadForm">
+<input type="file" id="file" name="file" required>
+<button type="submit">Upload & Generate PIN</button>
+</form>
+
+<div id="responseMessage"></div>
+
+</section>
+
+<section class="card">
+<h2>Download File</h2>
+
+<input type="text" id="pin" placeholder="Enter PIN">
+
+<button onclick="downloadFile()">Download</button>
+
+</section>
+
+</main>
+
+<footer>
+© 2025 FileVault
+</footer>
+
+</div>
+
+<script>
+
+const uploadForm = document.getElementById("uploadForm");
+const responseMessage = document.getElementById("responseMessage");
+
+const apiBaseUrl = "https://share-file-gamma.vercel.app";
+
+uploadForm.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+responseMessage.textContent = "Uploading...";
+responseMessage.style.color = "#4f46e5";
+
+const formData = new FormData();
+formData.append("file", document.getElementById("file").files[0]);
+
+try {
+
+const res = await fetch(`${apiBaseUrl}/upload`, {
+method: "POST",
+body: formData
+});
+
+if (!res.ok) throw new Error();
+
+const data = await res.json();
+
+responseMessage.textContent = `Upload successful. Your PIN: ${data.pin}`;
+responseMessage.style.color = "#16a34a";
+
+}
+catch {
+
+responseMessage.textContent = "Upload failed. Please try again.";
+responseMessage.style.color = "#dc2626";
+
+}
+
+});
+
+function downloadFile(){
+
+const pin = document.getElementById("pin").value.trim();
+
+if(!pin){
+alert("Please enter a PIN");
+return;
+}
+
+fetch(`${apiBaseUrl}/download/${pin}`)
+.then(res => {
+
+if(!res.ok){
+throw new Error("Invalid PIN");
+}
+
+return res.blob();
+
+})
+.then(blob => {
+
+const a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.click();
+
+})
+.catch(err => alert(err.message));
+
+}
+
+</script>
+
+</body>
 </html>

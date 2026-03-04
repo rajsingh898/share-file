@@ -47,22 +47,30 @@ return;
 }
 
 fetch(`${apiBaseUrl}/download/${pin}`)
-.then(res => {
+.then(response => {
 
-if (!res.ok) {
+if (!response.ok) {
 throw new Error("Invalid PIN");
 }
 
-return res.blob();
+const disposition = response.headers.get("content-disposition");
+
+let filename = "file";
+
+if (disposition && disposition.includes("filename=")) {
+filename = disposition.split("filename=")[1].replace(/"/g, "");
+}
+
+return response.blob().then(blob => ({ blob, filename }));
 
 })
-.then(blob => {
+.then(({ blob, filename }) => {
 
 const url = URL.createObjectURL(blob);
 
 const a = document.createElement("a");
 a.href = url;
-a.download = "download";
+a.download = filename;   // 👈 real filename
 document.body.appendChild(a);
 
 a.click();

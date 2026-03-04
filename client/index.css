@@ -1,143 +1,218 @@
-/* General body and layout styling */
-html, body {
-    height: 100%;  /* Ensure the body takes up full height */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;  /* Stack content and footer */
-    text-align: center;
-    background-color: #006d67;  /* Original background color */
+:root{
+
+--bg:#e6ebf2;
+--bg-accent:#dde3ec;
+--surface:#f7f9fc;
+--panel:#ffffff;
+--border:#d6dde7;
+
+--primary:#4f46e5;
+--primary-hover:#4338ca;
+--primary-soft:#eef2ff;
+
+--text-main:#0f172a;
+--text-muted:#64748b;
+
+--success:#16a34a;
+--error:#dc2626;
+
 }
 
-/* Main content styling */
-body {
-    flex-grow: 1;  /* Allow content to expand and push footer down */
-    display: flex;
-    flex-direction: column;
+*{
+box-sizing:border-box;
+font-family:"Times New Roman", Inter, system-ui;
 }
 
-/* Main heading styling */
-h1 {
-    font-size: 2rem;
-    color: #b0c4de;  /* Light steel blue for the heading */
-    font-weight: 600;
-    margin-top: 0;  /* Remove top margin */
-    width: 100%;  /* Ensure the heading fits within the screen */
-    max-width: 500px;  /* Prevent heading from being too large */
-    margin-bottom: 30px;  /* Space between heading and cards */
-    word-wrap: break-word;  /* Allow the heading text to wrap */
-    text-align: center;  /* Center align the heading horizontally */
-    align-self: center;  /* Ensure the heading is aligned in the center vertically */
+body{
+
+margin:0;
+min-height:100vh;
+
+background:linear-gradient(
+180deg,
+var(--bg-accent),
+var(--bg)
+);
+
+color:var(--text-main);
+
 }
 
-/* Centered container for the two cards */
-.container {
-    display: flex;
-    flex-direction: column;  /* Stack cards vertically */
-    gap: 30px;
-    align-items: center;  /* Center cards horizontally */
-    margin-top: 20px;  /* Space between heading and cards */
-    flex-grow: 1;  /* Allow container to expand */
+.app{
+
+max-width:1100px;
+margin:14px auto;
+
+background:var(--surface);
+
+border-radius:20px;
+border:1px solid var(--border);
+
+padding:34px 42px 42px;
+
 }
 
-/* Card styles */
-.card {
-    background-color: #f5f5f0;  /* Dark blue-grey card background */
-    border-radius: 10px;
-    padding: 30px;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    transition: transform 0.3s ease;
+header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:34px;
+
 }
 
-/* Card hover effect */
-.card:hover {
-    transform: translateY(-5px);
+.brand{
+
+font-size:1.45rem;
+font-weight:700;
+
 }
 
-/* Card heading styles */
-.card h2 {
-    font-size: 1.4rem;
-    color: #34495e;  /* Darker gray for card headers */
-    margin-bottom: 20px;
+.brand span{
+color:var(--primary);
 }
 
-/* Input and button styling */
+.tagline{
+color:var(--text-muted);
+font-size:0.95rem;
+}
+
+.hero{
+
+background:linear-gradient(
+135deg,
+var(--primary-soft),
+#f8faff
+);
+
+border:1px solid var(--border);
+border-radius:16px;
+
+padding:30px 34px;
+margin-bottom:34px;
+
+}
+
+.hero h1{
+font-size:1.85rem;
+margin-bottom:6px;
+}
+
+.hero p{
+color:var(--text-muted);
+max-width:640px;
+}
+
+.grid{
+
+display:grid;
+grid-template-columns:1.4fr 1fr;
+gap:30px;
+
+}
+
+.card{
+
+background:var(--panel);
+border:1px solid var(--border);
+
+border-radius:16px;
+
+padding:28px;
+
+}
+
+.card h2{
+font-size:1.15rem;
+margin-bottom:18px;
+}
+
 input[type="file"],
-input[type="text"],
-button {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    font-size: 16px;
-    border: 1px solid #34495e;  /* Darker blue-grey border */
-    border-radius: 8px;
-    box-sizing: border-box;
+input[type="text"]{
+
+width:100%;
+
+padding:13px 14px;
+
+margin-bottom:14px;
+
+border-radius:10px;
+
+border:1px solid var(--border);
+
+background:#fbfdff;
+
+font-size:0.95rem;
+
 }
 
-/* Button styling */
-button {
-    background-color: #3498db;  /* Bright blue for buttons */
-    color: white;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s;
+input:focus{
+
+outline:none;
+border-color:var(--primary);
+
 }
 
-button:hover {
-    background-color: #2980b9;  /* Darker blue on hover */
+button{
+
+width:100%;
+
+padding:13px;
+
+border-radius:10px;
+
+border:1px solid var(--primary);
+
+background:linear-gradient(
+180deg,
+#5b54f3,
+var(--primary)
+);
+
+color:white;
+
+font-size:0.95rem;
+font-weight:600;
+
+cursor:pointer;
+
 }
 
-/* Response message styling */
-#responseMessage {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #b0c4de;  /* Light steel blue for response message */
+button:hover{
+
+background:linear-gradient(
+180deg,
+#4f46e5,
+var(--primary-hover)
+);
+
 }
 
-/* Footer styling */
-footer {
-    background-color: #1f2a3a;
-    padding: 20px 0;
-    text-align: center;
-    width: 100%;
-    margin-top: auto;  /* Pushes footer to the bottom */
+#responseMessage{
+margin-top:14px;
+font-size:0.9rem;
 }
 
-.footer-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+footer{
+
+margin-top:42px;
+text-align:center;
+font-size:0.8rem;
+
+color:var(--text-muted);
+
 }
 
-.footer-link {
-    color: #a0c7d3;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
+@media (max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
 }
 
-.footer-link:hover {
-    color: #1f6fa0;
-    text-decoration: underline;
+.app{
+margin:18px;
+padding:28px;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.5rem;  /* Smaller font size for the heading */
-        margin-top: 10vh;  /* Flexible top margin */
-    }
-
-    .container {
-        flex-direction: column;  /* Keep stacking cards vertically */
-        align-items: center;  /* Keep the cards centered */
-    }
-
-    .card {
-        max-width: 100%;
-    }
 }

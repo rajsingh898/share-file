@@ -23,9 +23,9 @@
 <section class="hero">
 <h1>Share files securely using a one-time PIN</h1>
 <p>
-Upload a file and generate a secure PIN.  
-Share the PIN to allow someone to download the file.
-</p>
+        Upload files, generate a secure PIN, and share instantly.
+        No accounts, no friction — just fast and safe file transfer.
+    </p>
 </section>
 
 <main class="grid">
@@ -39,6 +39,11 @@ Share the PIN to allow someone to download the file.
 </form>
 
 <div id="responseMessage"></div>
+    <div class="features">
+            <span>🔒 Encrypted</span>
+            <span>⏱ Auto expiry</span>
+            <span>🚫 No account</span>
+        </div>
 
 </section>
 
@@ -100,39 +105,47 @@ responseMessage.style.color = "#dc2626";
 
 });
 
-function downloadFile(){
+function downloadFile() {
 
-const pin = document.getElementById("pin").value.trim();
+    const pin = document.getElementById("pin").value.trim();
 
-if(!pin){
-alert("Please enter a PIN");
-return;
+    if (!pin) {
+        alert("Please enter a PIN");
+        return;
+    }
+
+    fetch(`${apiBaseUrl}/download/${pin}`)
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Invalid PIN");
+        }
+
+        const disposition = response.headers.get("Content-Disposition");
+
+        let filename = "file";
+
+        if (disposition && disposition.includes("filename=")) {
+            filename = disposition
+                .split("filename=")[1]
+                .replace(/"/g, "");
+        }
+
+        return response.blob().then(blob => ({ blob, filename }));
+    })
+    .then(({ blob, filename }) => {
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+
+        document.body.appendChild(a);
+        a.click();
+
+        URL.revokeObjectURL(url);
+        a.remove();
+    })
+    .catch(err => alert(err.message));
 }
-
-fetch(`${apiBaseUrl}/download/${pin}`)
-.then(res => {
-    if (!res.ok) throw new Error("Invalid PIN");
-    return res.blob();
-})
-.then(blob => {
-
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "download";   // force download
-    document.body.appendChild(a);
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-    a.remove();
-})
-.catch(err => alert(err.message));
-
-}
-
-</script>
-
-</body>
-</html>

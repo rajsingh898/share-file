@@ -1,6 +1,3 @@
-
-
-
 <!-- Version 2  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +20,9 @@
 <section class="hero">
 <h1>Share files securely using a one-time PIN</h1>
 <p>
-        Upload files, generate a secure PIN, and share instantly.
-        No accounts, no friction — just fast and safe file transfer.
-    </p>
+Upload files, generate a secure PIN, and share instantly.
+No accounts, no friction — just fast and safe file transfer.
+</p>
 </section>
 
 <main class="grid">
@@ -39,11 +36,12 @@
 </form>
 
 <div id="responseMessage"></div>
-    <div class="features">
-            <span>🔒 Encrypted</span>
-            <span>⏱ Auto expiry</span>
-            <span>🚫 No account</span>
-        </div>
+
+<div class="features">
+<span>🔒 Encrypted</span>
+<span>⏱ Auto expiry</span>
+<span>🚫 No account</span>
+</div>
 
 </section>
 
@@ -64,88 +62,5 @@
 
 </div>
 
-<script>
-
-const uploadForm = document.getElementById("uploadForm");
-const responseMessage = document.getElementById("responseMessage");
-
-const apiBaseUrl = "https://share-file-gamma.vercel.app";
-
-uploadForm.addEventListener("submit", async (e) => {
-
-e.preventDefault();
-
-responseMessage.textContent = "Uploading...";
-responseMessage.style.color = "#4f46e5";
-
-const formData = new FormData();
-formData.append("file", document.getElementById("file").files[0]);
-
-try {
-
-const res = await fetch(`${apiBaseUrl}/upload`, {
-method: "POST",
-body: formData
-});
-
-if (!res.ok) throw new Error();
-
-const data = await res.json();
-
-responseMessage.textContent = `Upload successful. Your PIN: ${data.pin}`;
-responseMessage.style.color = "#16a34a";
-
-}
-catch {
-
-responseMessage.textContent = "Upload failed. Please try again.";
-responseMessage.style.color = "#dc2626";
-
-}
-
-});
-
-function downloadFile() {
-
-    const pin = document.getElementById("pin").value.trim();
-
-    if (!pin) {
-        alert("Please enter a PIN");
-        return;
-    }
-
-    fetch(`${apiBaseUrl}/download/${pin}`)
-    .then(response => {
-
-        if (!response.ok) {
-            throw new Error("Invalid PIN");
-        }
-
-        const disposition = response.headers.get("Content-Disposition");
-
-        let filename = "file";
-
-        if (disposition && disposition.includes("filename=")) {
-            filename = disposition
-                .split("filename=")[1]
-                .replace(/"/g, "");
-        }
-
-        return response.blob().then(blob => ({ blob, filename }));
-    })
-    .then(({ blob, filename }) => {
-
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = filename;
-
-        document.body.appendChild(a);
-        a.click();
-
-        URL.revokeObjectURL(url);
-        a.remove();
-    })
-    .catch(err => alert(err.message));
-}
+</body>
+</html>

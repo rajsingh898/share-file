@@ -216,3 +216,36 @@ padding:28px;
 }
 
 }
+
+.footer-link{
+color: var(--primary);
+font-weight:600;
+text-decoration:none;
+}
+
+.footer-link:hover{
+text-decoration:underline;
+}
+
+#responseMessage{
+
+margin-top:16px;
+
+font-size:1.2rem;
+font-weight:700;
+
+color:var(--success);
+
+background:#ecfdf5;
+
+border:1px solid #bbf7d0;
+
+padding:12px;
+
+border-radius:10px;
+
+text-align:center;
+
+letter-spacing:1px;
+
+}

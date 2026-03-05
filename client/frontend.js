@@ -5,94 +5,101 @@ const apiBaseUrl = "https://share-file-gamma.vercel.app";
 
 uploadForm.addEventListener("submit", async (e) => {
 
-e.preventDefault();
+    e.preventDefault();
 
-responseMessage.textContent = "Uploading...";
-responseMessage.style.color = "#4f46e5";
+    responseMessage.style.display = "block";
+    responseMessage.textContent = "Uploading...";
+    responseMessage.style.background = "#eef2ff";
+    responseMessage.style.border = "1px solid #4f46e5";
+    responseMessage.style.color = "#4f46e5";
 
-const formData = new FormData();
-formData.append("file", document.getElementById("file").files[0]);
+    const fileInput = document.getElementById("file");
 
-try {
+    if (!fileInput.files[0]) {
+        responseMessage.textContent = "Please select a file.";
+        return;
+    }
 
-const res = await fetch(`${apiBaseUrl}/upload`, {
-method: "POST",
-body: formData
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    try {
+
+        const res = await fetch(`${apiBaseUrl}/upload`, {
+            method: "POST",
+            body: formData
+        });
+
+        if (!res.ok) {
+            throw new Error("Upload failed");
+        }
+
+        const data = await res.json();
+
+        responseMessage.innerHTML = `
+        <div style="font-size:14px;margin-bottom:6px;">Download PIN</div>
+        <div style="font-size:32px;font-weight:800;letter-spacing:2px;">
+        ${data.pin}
+        </div>
+        `;
+
+        responseMessage.style.background = "#ecfdf5";
+        responseMessage.style.border = "2px solid #16a34a";
+        responseMessage.style.color = "#166534";
+
+    } catch (error) {
+
+        responseMessage.textContent = "Upload failed. Please try again.";
+        responseMessage.style.background = "#fee2e2";
+        responseMessage.style.border = "2px solid #dc2626";
+        responseMessage.style.color = "#991b1b";
+
+    }
+
 });
 
-if (!res.ok) throw new Error();
-
-const data = await res.json();
-
-responseMessage.style.display = "block";
-responseMessage.innerHTML = `
-<div style="font-size:14px;margin-bottom:6px;color:#15803d">
-Download PIN
-</div>
-<div style="font-size:32px;font-weight:800">
-${data.pin}
-</div>
-`;
-
-responseMessage.style.background = "#ecfdf5";
-responseMessage.style.border = "2px solid #16a34a";
-responseMessage.style.color = "#166534";
-
-}
-catch {
-
-responseMessage.style.display = "block";
-responseMessage.innerHTML = "Upload failed. Please try again.";
-responseMessage.style.background = "#fee2e2";
-responseMessage.style.border = "2px solid #dc2626";
-responseMessage.style.color = "#991b1b";
-
-}
-
-});
 
 function downloadFile() {
 
-const pin = document.getElementById("pin").value.trim();
+    const pin = document.getElementById("pin").value.trim();
 
-if (!pin) {
-alert("Please enter a PIN");
-return;
-}
+    if (!pin) {
+        alert("Please enter a PIN");
+        return;
+    }
 
-fetch(`${apiBaseUrl}/download/${pin}`)
-.then(response => {
+    fetch(`${apiBaseUrl}/download/${pin}`)
+    .then(response => {
 
-if (!response.ok) {
-throw new Error("Invalid PIN");
-}
+        if (!response.ok) {
+            throw new Error("Invalid PIN");
+        }
 
-const disposition = response.headers.get("content-disposition");
+        const disposition = response.headers.get("content-disposition");
 
-let filename = "file";
+        let filename = "file";
 
-if (disposition && disposition.includes("filename=")) {
-filename = disposition.split("filename=")[1].replace(/"/g, "");
-}
+        if (disposition && disposition.includes("filename=")) {
+            filename = disposition.split("filename=")[1].replace(/"/g, "");
+        }
 
-return response.blob().then(blob => ({ blob, filename }));
+        return response.blob().then(blob => ({ blob, filename }));
+    })
+    .then(({ blob, filename }) => {
 
-})
-.then(({ blob, filename }) => {
+        const url = URL.createObjectURL(blob);
 
-const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
 
-const a = document.createElement("a");
-a.href = url;
-a.download = filename;   // 👈 real filename
-document.body.appendChild(a);
+        document.body.appendChild(a);
+        a.click();
 
-a.click();
+        URL.revokeObjectURL(url);
+        a.remove();
 
-URL.revokeObjectURL(url);
-a.remove();
-
-})
-.catch(err => alert(err.message));
+    })
+    .catch(err => alert(err.message));
 
 }

@@ -168,7 +168,7 @@ const filePinMap = {};
 
 app.post('/upload', upload.single('file'), (req, res) => {
 
-  const pin = crypto.randomBytes(4).toString('hex');
+ const pin = Math.floor(1000 + Math.random() * 9000).toString();
 
   const filePath = path.join(uploadDirectory, req.file.filename);
 

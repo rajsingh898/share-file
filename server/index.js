@@ -139,7 +139,8 @@ const app = express();
 app.use(cors({
   origin: 'https://share-file-client.vercel.app',
   methods: ['GET', 'POST'],
-  credentials: true
+  credentials: true,
+  exposedHeaders: ['Content-Disposition']
 }));
 
 app.get('/', (req, res) => {

@@ -37,11 +37,13 @@ uploadForm.addEventListener("submit", async (e) => {
         const data = await res.json();
 
         responseMessage.innerHTML = `
-        <div style="font-size:14px;margin-bottom:6px;">Download PIN</div>
-        <div style="font-size:32px;font-weight:800;letter-spacing:2px;">
-        ${data.pin}
-        </div>
-        `;
+<div style="font-size:13px;margin-bottom:6px;color:#15803d">
+Download PIN
+</div>
+<div style="font-size:22px;font-weight:700;letter-spacing:2px;">
+${data.pin}
+</div>
+`;
 
         responseMessage.style.background = "#ecfdf5";
         responseMessage.style.border = "2px solid #16a34a";

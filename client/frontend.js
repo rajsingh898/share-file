@@ -25,10 +25,18 @@ if (!res.ok) throw new Error();
 const data = await res.json();
 
 responseMessage.style.display = "block";
-responseMessage.innerHTML = "Upload failed. Please try again.";
-responseMessage.style.background = "#fee2e2";
-responseMessage.style.border = "2px solid #dc2626";
-responseMessage.style.color = "#991b1b";
+responseMessage.innerHTML = `
+<div style="font-size:14px;margin-bottom:6px;color:#15803d">
+Download PIN
+</div>
+<div style="font-size:32px;font-weight:800">
+${data.pin}
+</div>
+`;
+
+responseMessage.style.background = "#ecfdf5";
+responseMessage.style.border = "2px solid #16a34a";
+responseMessage.style.color = "#166534";
 
 }
 catch {
